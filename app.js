@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 const projects = require("./data/projects.json");
+const articles = require("./data/articles.json");
 
 // ROUTES
 // Start defining your routes here:
@@ -30,10 +31,19 @@ app.get("/blog", (req, res) => {
   res.sendFile(__dirname + "/view/blog.html");
 
 })
-app.get("/data/projects", (req, res) => {
+
+app.get("/api/projects", (req, res) => {
   res.json (projects);
 
 }) 
+app.get("/api/articles", (req, res) => {
+  res.json (articles);
+
+}) 
+app.get("/*", (req, res) => {
+  res.sendFile(__dirname + "/view/not-found.html");
+
+})
 
 // START THE SERVER
 // Make your Express server listen on port 5005:
